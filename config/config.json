@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "archer-ser-hw-frm-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/archerSerHwFrmWp/ArcherSerHwFrmWpWebPart.js",
+          "manifest": "./src/webparts/archerSerHwFrmWp/ArcherSerHwFrmWpWebPart.manifest.json"
+        }
+      ]
+    },
+    "archer-ser-hw-sys-list-wp-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/archerSerHwSysListWp/ArcherSerHwSysListWpWebPart.js",
+          "manifest": "./src/webparts/archerSerHwSysListWp/ArcherSerHwSysListWpWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ArcherSerHwFrmWpWebPartStrings": "lib/webparts/archerSerHwFrmWp/loc/{locale}.js",
+    "ArcherSerHwSysListWpWebPartStrings": "lib/webparts/archerSerHwSysListWp/loc/{locale}.js"
+  }
+}
