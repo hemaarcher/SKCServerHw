@@ -160,7 +160,6 @@ export default class ArcherSerHwSysListWp extends React.Component<IArcherSerHwSy
         .filter(`Servers/Id eq ${this.state.qsId}`)
         .get();
 
-        console.dir(sysitems);
         
 
     await sysitems.forEach(async syitem => {
@@ -203,19 +202,19 @@ export default class ArcherSerHwSysListWp extends React.Component<IArcherSerHwSy
         );
 
       case 'FLevelSupport':
-        return <span style={{ whiteSpace: 'normal' }} >{item.FLevelSupport}</span>;
+        return <span style={{ whiteSpace: 'normal' }} >{item.FLevelSupport?.toString()}</span>;
 
       case 'SLevelSupport':
-        return <span style={{ whiteSpace: 'normal' }} >{item.SLevelSupport}</span>;
+        return <span style={{ whiteSpace: 'normal' }} >{item.SLevelSupport?.toString()}</span>;
 
       case 'TLevelSupport':
-        return <span style={{ whiteSpace: 'normal' }} >{item.TLevelSupport}</span>;
+        return <span style={{ whiteSpace: 'normal' }} >{item.TLevelSupport?.toString()}</span>;
 
       case 'PortFolioLead':
-        return <span style={{ whiteSpace: 'normal' }} >{item.PortFolioLead}</span>;
+        return <span style={{ whiteSpace: 'normal' }} >{item.PortFolioLead?.toString()}</span>;
  
       case 'ApplicationSLA':
-        return <span style={{ whiteSpace: 'normal' }}>{item.ApplicationSLA}</span>;
+        return <span style={{ whiteSpace: 'normal' }}>{item.ApplicationSLA?.toString()}</span>;
 
       case 'LaunchURLs':
         return <Link style={{ whiteSpace: 'normal' }} href="#">{item.LaunchURLs?.toString()}</Link>;

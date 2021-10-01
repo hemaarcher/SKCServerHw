@@ -14,10 +14,10 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
     super(props);
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
+    const strErrorMessages: string = "";
     
     let qsParam: string;
     params.has('idval') ? qsParam = params.get("idval") : qsParam = "";
-    
     this.state = {
       itemID: qsParam,
       Site: "",
@@ -35,15 +35,17 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
       CreatedBy: "",
       Modified: null,
       ModifiedBy: "",
+      strErrorMessages:"",
     };
     sp.setup({
       spfxContext: this.props.spcontext
     });
-    
+  
     this._getItem(Number(this.state.itemID));
+
+
   }
-  private  _closeClicked(): void {
-    
+  private  _closeClicked(): void {    
     window.history.back();
   }
   private async _getItem(qid:number) {
@@ -79,12 +81,10 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               DisplayUserEdited="User Deleted from systems";
             
             }  
-    
-  
-
-    console.dir(item);  
+      
 //set value 
 
+try{
     this.setState({
       HostName: item.Title,
       itemID: item.itemID,
@@ -95,7 +95,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
       DNAAlias: item.DNS_x0020_Alias,
       OS: item.OS,
       SLALevel: item.SLA_x0020_Level,
-      BackupPolicy:item.Backup_x0020_Policy[0],
+      BackupPolicy:item.Backup_x0020_Policy,
       SignOffStatus:"",
       Version:item.OData__UIVersionString,
       Created: FormatDate(item.Created),
@@ -104,6 +104,15 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
       ModifiedBy: DisplayUserEdited,
 
     });
+   
+    }
+  catch(error){     
+    
+    this.setState({strErrorMessages: "We are experiencing an Unknown Error, Kindly ScreenShot this page along the page URL and share it with SharePoint AMS Team."});
+    
+  }
+
+
   }
 
   
@@ -118,6 +127,8 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
            <PrimaryButton  text="Back" onClick={this._closeClicked} />
         </span>
         <span><h2>Server Hardware Details</h2></span>
+        <span className={styles.errText}><h3>{this.state.strErrorMessages}</h3></span>
+        
         <div className={styles.mytablestyles}>
         <table >
           <tr>
@@ -125,7 +136,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>HostName :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.HostName}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.HostName?.toString()}</Label></span>
             </td>
           </tr>
           <tr>
@@ -133,7 +144,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>DNA Alias :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.DNAAlias}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.DNAAlias?.toString()}</Label></span>
             </td>
           </tr>
         
@@ -142,7 +153,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>Site:</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.Site}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.Site?.toString()}</Label></span>
             </td>
           </tr>
           <tr>
@@ -150,7 +161,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>IP :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.IP}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.IP?.toString()}</Label></span>
             </td>
           </tr>
           
@@ -159,7 +170,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>Function :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.Function}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.Function?.toString()}</Label></span>
             </td>
           </tr>
         
@@ -168,7 +179,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>Operation Status : </Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.OperationStatus}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.OperationStatus?.toString()}</Label></span>
             </td>
           </tr>
           <tr>
@@ -176,7 +187,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>OS :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.OS}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.OS?.toString()}</Label></span>
             </td>
           </tr>
           <tr>
@@ -184,7 +195,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>SLA Level :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.SLALevel}</Label></span>
+              <span> <Label className={styles.valLabel}>{this.state.SLALevel?.toString()}</Label></span>
             </td>
           </tr>
 
@@ -193,15 +204,28 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
               <span> <Label className={styles.mylabel}>Backup Policy :</Label></span>
             </td>
             <td>
-              <span> <Label className={styles.valLabel}>{this.state.BackupPolicy}</Label></span>
-            </td>
+                  <span className={styles.valLabel}>
+
+                    {
+                      this.state.BackupPolicy?.map(function (item) {
+                        return (<div>
+                          {item.Title}
+                        </div>);
+                      })
+                      }
+
+
+                  </span>
+                </td>
+
+            
           </tr>         
           <tr>
             <td>
               <span> <Label className={styles.mylabel} disabled>Version :</Label></span>
             </td>
             <td>
-              <span> <Label  className={styles.valLabel} disabled>{this.state.Version}</Label></span>
+              <span> <Label  className={styles.valLabel} disabled>{this.state.Version?.toString()}</Label></span>
             </td>
           </tr>
           <tr>
