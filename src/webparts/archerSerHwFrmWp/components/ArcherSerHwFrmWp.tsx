@@ -7,7 +7,7 @@ import { DefaultButton ,mergeStyles, PrimaryButton, Label, Stack, MessageBar, Me
 import { sp, DateTimeFieldFormatType } from "@pnp/sp/presets/all";
 import { FormatDate } from '../../Utilities';
 import { ISiteUserProps } from "@pnp/sp/site-users/";
-
+import { SPHttpClient } from '@microsoft/sp-http';
 
 export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpProps, IArcherSerHwFrmWpState> {
   constructor(props: IArcherSerHwFrmWpProps, state: IArcherSerHwFrmWpState) {
@@ -55,7 +55,7 @@ export default class ArcherSerHwFrmWp extends React.Component<IArcherSerHwFrmWpP
       .select("*","OData__UIVersionString")
       .get();
 
-
+    console.dir(item);
       
     let uservalue: number = item["AuthorId"];
     let DisplayUserCreated:string;
@@ -104,14 +104,13 @@ try{
       ModifiedBy: DisplayUserEdited,
 
     });
-   
+    this.setState({strErrorMessages: "We are experiencing an Unknown Error, Kindly ScreenShot this page along the page URL and share it with SharePoint AMS Team."});
     }
   catch(error){     
     
     this.setState({strErrorMessages: "We are experiencing an Unknown Error, Kindly ScreenShot this page along the page URL and share it with SharePoint AMS Team."});
     
   }
-
 
   }
 
@@ -209,7 +208,7 @@ try{
                     {
                       this.state.BackupPolicy?.map(function (item) {
                         return (<div>
-                          {item.Title}
+                          {item}
                         </div>);
                       })
                       }
