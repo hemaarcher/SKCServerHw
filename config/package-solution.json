@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "Archer-SKC-ServerHW-Frm",
+    "name": "Archer-SKC-ServerHWs",
     "id": "764551db-e6c8-4bab-8394-4afb7efa2078",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "developer": {
@@ -15,6 +15,6 @@
     }
   },
   "paths": {
-    "zippedPackage": "solution/skc-solution.sppkg"
+    "zippedPackage": "solution/SKCPackages.sppkg"
   }
 }
